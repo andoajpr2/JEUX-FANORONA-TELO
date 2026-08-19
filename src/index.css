@@ -1,1 +1,112 @@
 @import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background-color: #211610;
+  color: #f0e4cf;
+  font-family: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Police d'affichage (titres) */
+.font-affiche {
+  font-family: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+}
+
+/* Motif de fond : treillis fanorona gravé, très discret */
+.motif-fanorona {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23e2a54c' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M20 20H120M20 70H120M20 120H120M20 20V120M70 20V120M120 20V120M20 20L120 120M120 20L20 120'/%3E%3C/g%3E%3Cg fill='%23e2a54c' fill-opacity='0.07'%3E%3Ccircle cx='20' cy='20' r='1.7'/%3E%3Ccircle cx='70' cy='20' r='1.7'/%3E%3Ccircle cx='120' cy='20' r='1.7'/%3E%3Ccircle cx='20' cy='70' r='1.7'/%3E%3Ccircle cx='70' cy='70' r='1.7'/%3E%3Ccircle cx='120' cy='70' r='1.7'/%3E%3Ccircle cx='20' cy='120' r='1.7'/%3E%3Ccircle cx='70' cy='120' r='1.7'/%3E%3Ccircle cx='120' cy='120' r='1.7'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+/* Halos chauds qui dérivent lentement */
+.halos {
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(226, 165, 76, 0.13), transparent 62%),
+    radial-gradient(820px 620px at 106% 108%, rgba(158, 54, 32, 0.12), transparent 58%);
+  animation: derive 24s ease-in-out infinite alternate;
+}
+
+.vignette {
+  background: radial-gradient(ellipse at 50% 42%, transparent 48%, rgba(12, 7, 3, 0.62) 100%);
+}
+
+@keyframes derive {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2.5%, 3%, 0) scale(1.06);
+  }
+}
+
+/* Tracé de la ligne gagnante */
+.trace-ligne {
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: trace 0.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Apparition douce (journal, bandeau…) */
+.apparition {
+  animation: apparition 0.28s ease-out both;
+}
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Flottement du plateau décoratif d'en-tête */
+.flot {
+  animation: flot 6s ease-in-out infinite;
+}
+@keyframes flot {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Barre de défilement fine pour le journal */
+.journal {
+  scrollbar-width: thin;
+  scrollbar-color: #5d4429 transparent;
+}
+.journal::-webkit-scrollbar {
+  width: 6px;
+}
+.journal::-webkit-scrollbar-thumb {
+  background: #5d4429;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halos,
+  .flot,
+  .apparition,
+  .trace-ligne {
+    animation: none;
+  }
+  .trace-ligne {
+    stroke-dashoffset: 0;
+  }
+}
